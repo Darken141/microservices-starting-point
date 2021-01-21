@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  # image-service:
+  #   restart: always
+  #   image: darken141/microservice-images
+  #   command: npm run start
+  #   environment:
+  #     - MONGO_URI=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongodb:27017/${MONGO_INITDB_DATABASE}
+  #   ports: 
+  #     - 9000:3000
+  #   links: 
+  #     - mongodb
+  #   volumes: 
+  #     - ./image-uploading:/app
+  #   networks:
+  #     - local
+  #   depends_on: 
+  #     - mongodb
+
+  mongodb:
+    image: mongo:4.2.3-bionic
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+
+    volumes:
+      - ./mongo/mongo-entrypoint:/docker-entrypoint-initdb.d
+      - ./mongo/mongodb:/data/db
+      - ./mongo/mongoconfig:/data/configdb
+    networks:
+      - local
+
+networks:
+  local:
+    driver: bridge
