@@ -11,3 +11,4 @@ MONGO_INITDB_ROOT_PASSWORD=[passwordForDatabase]
 ## Available microservices
 
 - [image-uploader](https://github.com/Darken141/microservice-images)
+- [product-rest-api](https://github.com/Darken141/microservice-product)
